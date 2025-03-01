@@ -22,13 +22,13 @@ spec:
           image: shaikkhajaibrahim/libwebstore:1.0
           ports:
           - containerPort: 3000
-      resources:
-        requests:
-          cpu: "128Mi"
-          memory: "250m"
-        limits:
-          cpu: "256Mi"
-          memory: "500m"
+          resources:
+            requests:
+              cpu: "128Mi"
+              memory: "250m"
+            limits:
+              cpu: "256Mi"
+              memory: "500m"
           env:
             - name: REACT_APP_BACKEND_API_URL
               value: http://:8000/api/v1
