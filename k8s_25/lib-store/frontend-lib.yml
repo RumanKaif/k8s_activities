@@ -8,7 +8,7 @@ metadata:
     app: frontend-lib
 spec:
   minReadySeconds: 5
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: lib
@@ -24,11 +24,11 @@ spec:
           - containerPort: 3000
           resources:
             requests:
-              cpu: "128Mi"
-              memory: "250m"
+              cpu: "128m"
+              memory: "250Mi"
             limits:
-              cpu: "256Mi"
-              memory: "500m"
+              cpu: "256m"
+              memory: "500Mi"
           env:
             - name: REACT_APP_BACKEND_API_URL
               value: http://:8000/api/v1

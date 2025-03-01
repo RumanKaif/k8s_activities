@@ -8,7 +8,7 @@ metadata:
     app: books-db
 spec:
   minReadySeconds: 5
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: books-db
@@ -24,11 +24,11 @@ spec:
           - containerPort: 5432
           resources:
             requests:
-              cpu: "128Mi"
-              memory: "250m"
+              cpu: "128m"
+              memory: "250Mi"
             limits:
-              cpu: "256Mi"
-              memory: "500m"
+              cpu: "256m"
+              memory: "500Mi"
           env:
             - name: POSTGRES_USER
               value: user
