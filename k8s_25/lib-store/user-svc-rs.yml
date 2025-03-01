@@ -1,0 +1,55 @@
+---
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: user-svc-rs
+  labels:
+    env: dev
+    app: user-svc
+spec:
+  minReadySeconds: 5
+  replicas: 3
+  selector:
+    matchLabels:
+      app: user-svc
+  template:
+    metadata:
+      labels:
+        app: user-svc
+    spec:
+      containers:
+        - name: user-svc
+          image:  shaikkhajaibrahim/libuserssvc:1.0
+          ports: 
+          - containerPort: 8000
+      resources:
+        requests:
+          cpu: "128Mi"
+          memory: "250m"
+        limits:
+          cpu: "256Mi"
+          memory: "500m"
+          env:
+            - name: DATABASE_URL
+              value: “postgresql://:@:5432/“
+            - name: SECRET_KEY
+              value: ‘YtDEVWnL35aAIP-5yxeLjAZ49R920-mMNDfwPyWULu63HFsYzo0f-LO2InxC8eu428k’
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: user-svc
+spec:
+  type: ClusterIP
+  selector:
+    app: user-svc
+  ports:
+  - port: 8000
+    targetPort: 8000
+
+            
+      
+
+
+
