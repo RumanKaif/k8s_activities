@@ -29,9 +29,9 @@ spec:
             limits:
               cpu: "256m"
               memory: "500Mi"
-            envFrom:
-            - secretRef:
-                name: users-db-svc-key
+          envFrom:
+          - secretRef:
+              name: users-db-svc-key
 
 
 ---
@@ -40,7 +40,7 @@ kind: Service
 metadata:
   name: user-svc
 spec:
-  type: ClusterIP
+  type: NodePort
   selector:
     app: user-svc
   ports:

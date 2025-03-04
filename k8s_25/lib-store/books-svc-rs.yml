@@ -29,9 +29,9 @@ spec:
             limits:
               cpu: "256m"
               memory: "500Mi"
-            envFrom:
-            - secretRef:
-                name: users-svc-key
+          envFrom:
+          - secretRef:
+              name: books-db-svc-key
           
 ---
 apiVersion: v1
@@ -39,7 +39,7 @@ kind: Service
 metadata:
   name: books-svc
 spec:
-  type: ClusterIP 
+  type: NodePort 
   selector:
     app: books-svc
   ports:

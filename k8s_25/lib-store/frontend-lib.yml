@@ -29,28 +29,6 @@ spec:
             limits:
               cpu: "256m"
               memory: "500Mi"
-          livenessProbe:
-            initialDelaySeconds: 5
-            failureThreshold: 3
-            periodSeconds: 10
-            tcpSocket:
-              port: 8000
-          readinessProbe:
-            initialDelaySeconds: 5
-            failureThreshold: 3
-            periodSeconds: 10
-            httpGet:
-              path: doc/
-              port: 8000
-          startupProbe:
-            initialDelaySeconds: 5
-            failureThreshold: 3
-            periodSeconds: 10
-            exec:
-              command:
-                - /bin/sh
-                - -c
-                - ps aux | grep uvicorn
           envFrom:
           - configMapRef:
               name: frontend-lib-confmap
@@ -61,7 +39,7 @@ kind: Service
 metadata:
   name: lib-svc
 spec:
-  type: ClusterIP
+  type: NodePort
   selector:
     app: lib
   ports:
