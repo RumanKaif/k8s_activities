@@ -29,12 +29,10 @@ spec:
             limits:
               cpu: "256m"
               memory: "500Mi"
-          env:
-            - name: DATABASE_URL
-              value: “postgresql://:@:5432/“
-            - name: SECRET_KEY
-              value: ‘YtDEVWnL35aAIP-5yxeLjAZ49R920-mMNDfwPyWULu63HFsYzo0f-LO2InxC8eu428k’
-
+            envFrom:
+            - secretRef:
+                name: users-svc-key
+          
 ---
 apiVersion: v1
 kind: Service

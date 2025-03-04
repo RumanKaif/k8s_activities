@@ -29,14 +29,10 @@ spec:
             limits:
               cpu: "256m"
               memory: "500Mi"
-          env:
-            - name: POSTGRES_USER
-              value: user
-            - name: POSTGRES_PASSWORD
-              value: password
-            - name: POSTGRES_DB
-              value: usersdb
-
+            envFrom:
+            - secretRef:
+                name: users-db-key
+          
 ---
 apiVersion: v1
 kind: Service

@@ -29,14 +29,32 @@ spec:
             limits:
               cpu: "256m"
               memory: "500Mi"
-          env:
-            - name: REACT_APP_BACKEND_API_URL
-              value: http://:8000/api/v1
-            - name: REACT_APP_BOOKS_API_URL
-              value: http://:8000/api/v1/books
-            - name: REACT_APP_USERS_API_URL
-              value: http://:8000/api/v1/users
-
+          livenessProbe:
+            initialDelaySeconds: 5
+            failureThreshold: 3
+            periodSeconds: 10
+            tcpSocket:
+              port: 8000
+          readinessProbe:
+            initialDelaySeconds: 5
+            failureThreshold: 3
+            periodSeconds: 10
+            httpGet:
+              path: doc/
+              port: 8000
+          startupProbe:
+            initialDelaySeconds: 5
+            failureThreshold: 3
+            periodSeconds: 10
+            exec:
+              command:
+                - /bin/sh
+                - -c
+                - ps aux | grep uvicorn
+          envFrom:
+          - configMapRef:
+              name: frontend-lib-confmap
+            
 ---
 apiVersion: v1
 kind: Service
