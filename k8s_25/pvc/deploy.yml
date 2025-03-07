@@ -28,11 +28,11 @@ spec:
         - mountPath: "/data/db"
           name: mdb
       volumes:
-      - name: mdb
-        persistentVolumeClaim:
-          claimName: mypvc
-        ports:
-        - containerPort: 8081
+        - name: mdb
+          persistentVolumeClaim:
+            claimName: mypvc
+          ports:
+          - containerPort: 8081
 
 ---
 apiVersion: v1
